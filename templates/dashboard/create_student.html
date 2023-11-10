@@ -1,0 +1,38 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+  <h1>生徒登録</h1>
+  <form method="POST" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.student_name.label_tag }}
+      {{ form.student_name }}
+    </div>
+    <div class="form-group">
+      {{ form.first_name.label_tag }}
+      {{ form.first_name }}
+    </div>
+    <div class="form-group">
+      {{ form.last_name.label_tag }}
+      {{ form.last_name }}
+    </div>
+    <div class="form-group">
+      {{ form.gender.label_tag }}
+      {{ form.gender }}
+    </div>
+    <div class="form-group">
+      {{ form.birth_date.label_tag }}
+      {{ form.birth_date }}
+    </div>
+    <div class="form-group">
+      {{ form.grade.label_tag }}
+      {{ form.grade }}
+    </div>
+    <div class="form-group">
+      {{ form.classroom.label_tag }}
+      {{ form.classroom }}
+    </div>
+    <button type="submit" class="btn btn-primary">登録</button>
+  </form>
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+{% if current_month == 6 or current_month == 12 %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form method="POST" class="needs-validation" novalidate>
+        {% csrf_token %}
+            <div class="mb-3">
+                <label for="teacher" class="form-label">講師名:</label>
+                {{ form.instructor }}
+                <div class="invalid-feedback">講師名を選択してください。</div>
+            </div>
+
+        <div class="mb-3">
+          <label for="instructor_rating" class="form-label">講師の評価:</label>
+          <select name="instructor_rating" id="instructor_rating" class="form-select" required>
+            <option value="1">1 - 最低</option>
+            <option value="2">2 - 普通</option>
+            <option value="3" selected>3 - ふつう</option>
+            <option value="4">4 - 良い</option>
+            <option value="5">5 - 最高</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="communication_rating" class="form-label">対応の評価:</label>
+          <select name="communication_rating" id="communication_rating" class="form-select" required>
+            <option value="1">1 - 最低</option>
+            <option value="2">2 - 普通</option>
+            <option value="3" selected>3 - ふつう</option>
+            <option value="4">4 - 良い</option>
+            <option value="5">5 - 最高</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="curriculum_rating" class="form-label">コース内容とカリキュラムの評価:</label>
+          <select name="curriculum_rating" id="curriculum_rating" class="form-select" required>
+            <option value="1">1 - 最低</option>
+            <option value="2">2 - 普通</option>
+            <option value="3" selected>3 - ふつう</option>
+            <option value="4">4 - 良い</option>
+            <option value="5">5 - 最高</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="satisfaction_rating" class="form-label">授業の満足度:</label>
+          <select name="satisfaction_rating" id="satisfaction_rating" class="form-select" required>
+            <option value="1">1 - 最低</option>
+            <option value="2">2 - 普通</option>
+            <option value="3" selected>3 - ふつう</option>
+            <option value="4">4 - 良い</option>
+            <option value="5">5 - 最高</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="comment" class="form-label">その他のコメントや意見:</label>
+          <textarea name="comment" id="comment" class="form-control"></textarea>
+        </div>
+        <div class ="text-center">
+        <button type="submit" class="btn btn-primary">アンケートを送信</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<p style ="text-align:center">アンケートはまだありません</p>
+{% endif %}
+{% endblock %}

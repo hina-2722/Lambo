@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" style="width: 80%; margin: 50px auto; background-color: #f5f5f5; padding: 20px;">
+  <h3 style="margin-bottom: 20px; text-align:center">生徒情報</h3>
+    <table class="student-info" style="border-collapse: collapse; width: 100%; margin-bottom:20px;">
+      <tr>
+        <th style="border: 1px solid black; padding: 10px;"><strong>生徒名</strong></th>
+        <td style="border: 1px solid black; padding: 10px;">{{ reservation.student.student_name }}</td>
+      </tr>
+      <tr>
+        <th style="border: 1px solid black; padding: 10px;"><strong>授業日</strong></th>
+        <td style="border: 1px solid black; padding: 10px;">{{ reservation.schedule.date }}</td>
+      </tr>
+      <tr>
+        <th style="border: 1px solid black; padding: 10px;"><strong>授業時間</strong></th>
+        <td style="border: 1px solid black; padding: 10px;">{{ reservation.time }}</td>
+      </tr>
+    </table>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+  {% if user_matches_instructor %}
+    <input type="submit" value="保存" class="btn btn-primary">
+  </form>
+  <div style="text-align:center">
+  <a href ="{% url 'instructor:todays_class' pk=instructor.pk %}"><button type ="submit">戻る</button></a>
+</div>
+  {% endif %}
+</div>
+{% endblock %}
+
+
+

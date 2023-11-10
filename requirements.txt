@@ -1,0 +1,14 @@
+asgiref==3.7.2
+backports.zoneinfo==0.2.1
+bootstrap4==0.1.0
+Django==4.2.7
+django-crontab==0.7.1
+django-jazzmin==2.6.0
+gunicorn==21.2.0
+packaging==23.2
+Pillow==10.1.0
+pypng==0.20220715.0
+qrcode==7.4.2
+reportlab==4.0.7
+sqlparse==0.4.4
+typing_extensions==4.8.0

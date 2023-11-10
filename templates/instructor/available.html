@@ -1,0 +1,57 @@
+{% block content %}
+{% include 'instructor/instructor_base.html' %}
+
+
+<h1 style ="text-align:center; margin-bottom:30px;">シフト登録</h1>
+<form method="POST" class="my-form">
+  {% csrf_token %}
+
+  <div class="form-group text-center">
+    <label for="{{ form.date.id_for_label }}">講師名:</label>
+    {{ form.instructor_name }}
+  </div>
+
+  <div class="form-group text-center">
+    <label for="{{ form.date.id_for_label }}">日付:</label>
+    {{ form.date }}
+  </div>
+
+  <div class="form-group text-center">
+    <label>時間割:</label>
+    <div class="time-slots text-center">
+        {{ form.time }}
+    </div>
+  </div>
+
+  <div class="form-group text-center">
+    {{ form.errors }} 
+  </div>
+
+  <div class="text-center">
+    <input type="submit" value="送信" class="btn-submit">
+  </div>
+</form>
+
+
+  <style>
+.time-slots {
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.time-slot {
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.time-slot input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.btn-submit {
+  /* ボタンのスタイル */
+}
+
+  </style>
+  {% endblock %}
+

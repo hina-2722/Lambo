@@ -1,0 +1,33 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+  <h1>講師一覧</h1>
+
+  <form method="GET" action="" style="margin-top:20px; margin-bottom:20px;">
+    <input type="text" name="search" placeholder="講師名を入力" value="{{ search_query }}">
+    <button type="submit">検索</button>
+</form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>講師名</th>
+        <th>年齢</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for instructor in instructors %}
+        <tr>
+          <td style="text-align:center;">{{ instructor.name }}</td>
+          {% if instructor.age%}
+          <td>{{ instructor.age }}歳</td>
+          {% else %}
+          <td>まだありません</td>
+          {% endif%}
+          <td><a href="{% url 'dashboard:instructor_detail' pk=instructor.pk %}">詳細</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

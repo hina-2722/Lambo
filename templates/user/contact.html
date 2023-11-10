@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+  <h1 style ="text-align:center;">お問い合わせ</h1>
+  <form  method="post">
+    {% csrf_token %}
+    {{ form.name.label_tag }}<br>
+    {{ form.name }}<br>
+    {{ form.user.label_tag }}<br>
+    {{ form.user }}<br>
+    {{ form.title.label_tag }}<br>
+  {{ form.title }}<br>
+  {{ form.message.label_tag }}<br>
+  {{ form.message }}<br>
+    <button type="submit">送信</button>
+  </form>
+
+<style>
+  form{
+    width:80%;
+    margin-left:10px;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+  <h1>生徒一覧</h1>
+  <form method="GET" action="" style="margin-top:20px; margin-bottom:20px;">
+    <input type="text" name="search" placeholder="生徒名を入力" value="{{ search_query }}">
+    <button type="submit">検索</button>
+</form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>生徒名</th>
+        <th>性別</th>
+        <th>年齢</th>
+        <th>状態</th>
+        <th>個別形式</th>
+        <th>コース</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+        <tr>
+          <td>{{ student.student_name }}</td>
+          <td>{{ student.gender }}</td>
+          <td>{{ student.age }}歳</td>
+          {% if student.is_external == False%}
+          <td>塾生</td>
+          {% else%}
+          <td>塾外生</td>
+          {% endif%}
+          {% if student.to_2 == True%}
+          <td>1対2</td>
+          {% elif student.to_1 == True%}
+          <td>1対1</td>
+          {% else %}
+          <td></td>
+          {% endif%}
+          <td>{{ student.classroom }}</td>
+          <td><a href="{% url 'dashboard:student_detail' pk=student.pk %}">詳細</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

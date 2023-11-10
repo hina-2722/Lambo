@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% include 'navbar.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation Confirmation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card text-center">
+              <div class="card-header">
+                <h1 class="card-title">予約確認</h1>
+              </div>
+              <div class="card-body">
+                <p class="card-text">以下の予約情報で予約を確定しますか？</p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><strong>お名前:</strong> {{ student.student_name }}</li>
+                  <li class="list-group-item"><strong>予約日:</strong> {{ reserved_time }}</li>
+                  <li class="list-group-item"><strong>時間:</strong> {{ selected_time_slot }}</li>
+                  <li class="list-group-item"><strong>講師名:</strong> {{ schedule.instructor_name }}</li>
+                 
+                </ul>
+              </div>
+              <div class="card-footer">
+                {% if tickets %}
+                <form action="{% url 'reservation:confirm' pk=student.pk%}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="student_name" value="{{ student.student_name }}">
+                    <input type="hidden" name="reserved_time" value="{{ reserved_time }}">
+                    <input type="hidden" name="schedule_id" value="{{ schedule.id }}">
+                    <input type="hidden" name="time_slot" value="{{ selected_time_slot }}">
+                    <!-- 予約を確定するボタン -->
+                    <button type="submit">予約を確定する</button>
+                </form>
+                {% else %}
+                <form action="{% url 'student:ticket_purchase' pk=student.pk%}">
+                  {% csrf_token %}
+                  <!-- 予約を確定するボタン -->
+                  <button type="submit">チケットを購入する</button>
+                  <p style ="color:red;">チケットを購入してください</p>
+              </form>
+              {% endif %}
+                <a href="{% url 'reservation:schedule_list' pk=student.pk %}">カレンダーに戻る</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
+
+{% endblock%}

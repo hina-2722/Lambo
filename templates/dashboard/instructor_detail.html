@@ -1,0 +1,42 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{{ instructor.name }}さんの詳細</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <b>生年月日:</b>
+              {{ instructor.birth_date|date:'Y/m/d'  }}
+            </li>
+            <li class="list-group-item">
+              <b>年齢:</b>
+              {{ instructor.age }}
+            </li>
+            <li class="list-group-item">
+              <b>性別:</b>
+              {{ instructor.gender }}
+            </li>
+            <li class="list-group-item">
+              <b>授業：</b>
+             <!--コーチできるカテゴリー-->
+            </li>
+            <li class="list-group-item">
+              <b>好きな食べ物:</b>
+              {{ instructor.like}}
+            </li>
+ 
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

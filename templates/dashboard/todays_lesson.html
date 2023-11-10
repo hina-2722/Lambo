@@ -1,0 +1,24 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+<h2 style ="text-align:center;">今日の授業</h2>
+
+<table>
+  <tr>
+    <th>生徒名</th>
+    <th>担当</th>
+    <th>授業時間</th>
+    <th>授業日</th>
+  </tr>
+<tr>
+{% for lesson in todays_lesson %}
+  <td>{{ lesson.student }}</td>
+  <td>{{ lesson.schedule.instructor_name }}</td>
+  <td>{{ lesson.time }}</td>
+  <td>{{ lesson.reserved_time|date:'m/d'  }}</td>
+</tr>
+{% empty %}
+  <p>予約はありません。</p>
+{% endfor %}
+
+{% endblock%}

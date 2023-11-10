@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% include 'navbar.html' %}
+<style>
+  .reservation-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  .reservation-item {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px;
+      text-align: center;
+      width: calc(50% - 1px);
+      margin-bottom: 20px;
+      box-sizing: border-box;
+  }
+
+  .reservation-item img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+  }
+</style>
+
+<h2 style="text-align:center;">授業予約</h2>
+{% if reservations %}
+<ul class="reservation-list">
+  {% for reservation in reservations%}
+  <li class="reservation-item">
+      {% if reservation.schedule.instructor_name.photo %}
+      <img src="{{ reservation.schedule.instructor_name.photo.url }}" alt="講師の写真">
+      {% else %}
+      <p>講師の写真はまだありません</p>
+      {% endif %}
+      <h4>{{ reservation.schedule.instructor_name }}</h4>
+      <p>{{ reservation.reserved_time|date:"Y年m月d日" }}</p>
+      <p>{{ reservation.time.time }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p style ="text-align:center">予約はありません</p>
+{% endif %}
+{% endblock %}

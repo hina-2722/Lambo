@@ -1,0 +1,35 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+<h2 style ="text-align:center;">アンケート結果</h2>
+
+<form method="GET" action="" style="margin-top:20px; margin-bottom:20px;">
+  <input type="text" name="search" placeholder="生徒名を入力" value="{{ search_query }}">
+  <button type="submit">検索</button>
+</form>
+
+<table>
+  <tr>
+    <th>講師名</th>
+    <th>講師の評価</th>
+    <th>コースの評価</th>
+    <th>満足度</th>
+    <th>コメント</th>
+    <th>生徒名</th>
+  </tr>
+<tr>
+{% for questionnaire in questionnaires %}
+  <td>{{ questionnaire.instructor }}</td>
+  <td>{{ questionnaire.instructor_rating }}</td>
+  <td>{{ questionnaire.curriculum_rating }}</td>
+  <td>{{ questionnaire.satisfaction_rating  }}</td>
+  <td>{{ questionnaire.comment  }}</td>
+  <td>{{ questionnaire.student  }}</td>
+</tr>
+{% empty %}
+  <p>予約はありません。</p>
+{% endfor %}
+
+
+
+{% endblock%}

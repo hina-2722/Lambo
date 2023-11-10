@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'instructor/instructor_base.html' %}
+
+<div class="container mt-4">
+  <h1>{{current_month}}月のお給料閲覧</h1>
+  {% if monthly_salary %}
+  <h2>{{ monthly_salary }}円</h2>
+  {% else %}
+ <p>~給与情報がありません~</p>
+  {% endif %}
+</div>
+
+{% endblock %}

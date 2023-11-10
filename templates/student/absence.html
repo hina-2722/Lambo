@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+  <h1>欠席・振り替え申請</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.absence_date.id_for_label }}">日付:</label>
+      {{ form.absence_date }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.reason.id_for_label }}">理由:</label>
+      {{ form.reason }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.make_up_date.id_for_label }}">振替日:</label>
+      {{ form.make_up_date }}
+    </div>
+    <button type="submit" class="btn btn-primary">送信</button>
+  </form>
+{% endblock %}

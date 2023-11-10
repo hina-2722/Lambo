@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static%}
+{% include 'navbar.html' %}
+<style>
+.card {
+  border:solid 3px;
+  border-color: #87CEEB; /* 淡い水色に変更 */
+  width:70%;
+  margin :0 auto;
+}
+h2{
+    margin-bottom:50px;
+}
+h2 span{
+    margin-right:30px;
+    margin-left:30px;
+}
+h3{
+    font-size:18px;
+}
+</style>
+
+  <h2 class="text-center"><span>\</span>お知らせ<span>/</span></h2>
+  <div class="row">
+    {% if notifications %}
+      {% for notification in notifications %}
+        <div class="col-md-12">
+          <div class="card mb-4">
+            {% if notification.is_new == True %}
+            <img src ="{% static 'image/new-icon.png' %}" style="width:6%; height:6%;">
+            {% endif %}
+            <div class="card-body" style="text-align:center">
+              <p class="card-text text-muted">{{ notification.created_at|date:"Y年m月d日" }}</p>
+              <h3 class="card-title">{{ notification.title }}</h3>
+              <p class="card-text">{{ notification.content }}</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group" style="margin:0 auto;">
+                <a href="{% url  'user:detail_notifications' pk=student.pk notification_id=notification.pk%}" class="btn btn-sm btn-outline-secondary" style="margin-bottom:20px;" >詳細を見る</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="col text-center">
+        <p>お知らせはありません。</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

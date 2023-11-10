@@ -1,0 +1,47 @@
+/* 全体の背景色を設定 */
+body {
+    background-color: #f8f9fa;
+  }
+  
+  /* jumbotronの背景色を設定 */
+  .jumbotron {
+    background-color: #ffffff;
+  }
+  
+  /* カードのボックスシャドウを設定 */
+  .card {
+    border: none;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+  }
+  
+  /* カードのボタンのカラーを設定 */
+  .card .btn-primary {
+    color: #ffffff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  /* カードのボタンのホバー時のカラーを設定 */
+  .card .btn-primary:hover {
+    color: #ffffff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  /* カードのタイトルのカラーを設定 */
+  .card-title {
+    color: #343a40;
+  }
+  
+  /* カードのテキストのカラーを設定 */
+  .card-text {
+    color: #6c757d;
+  }
+  
+
+  table {
+    margin: 0 auto;
+  }
+
+  
+  

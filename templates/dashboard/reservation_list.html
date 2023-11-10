@@ -1,0 +1,34 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+
+<h2 style ="text-align:center;">授業予約</h2>
+
+<form method="GET" action="" style="margin-top:20px; margin-bottom:20px;">
+  <input type="text" name="search" placeholder="01-11" value="{{ search_query }}">
+  <button type="submit">検索</button>
+</form>
+
+{% if reservations %}
+  <table>
+    <tr>
+      <th>生徒名</th>
+      <th>担当</th>
+      <th>授業時間</th>
+      <th>授業日</th>
+    </tr>
+
+    {% for reservation in reservations|dictsort:'reserved_time' %}
+    <tr>
+      <td>{{ reservation.student }}</td>
+      <td>{{ reservation.schedule.instructor_name }}</td>
+      <td>{{ reservation.time }}</td>
+      <td>{{ reservation.reserved_time|date:'m/d'  }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>予約はありません。</p>
+{% endif %}
+
+{% endblock %}

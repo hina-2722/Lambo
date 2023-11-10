@@ -1,0 +1,32 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+  <h1>授業日報履歴</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>生徒名</th>
+        <th>時間</th>
+        <th>講師名</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for report in reports %}
+        <tr>
+          <td>{{ report.date }}</td>
+          <td>なし</td>
+          <td>なし</td>
+          <td>{{ report.instructor }}</td>
+        {% if report.is_completed == True%}
+          <td>入力済</td>
+        {% else %}
+          <td>未入力</td>
+        {% endif %}
+          <td><a href="#">詳細</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

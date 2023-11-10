@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% include 'navbar.html' %}
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .button {
+  width:100px;
+  display: inline-block;
+  padding:5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 50px;
+  background-color:#f7d9b674; /* 肌色に適した色に変更してください */
+  color: black;
+  cursor: not-allowed;
+  opacity: 0.5;
+  margin :0 auto;
+  margin-bottom:5px;
+}
+        
+    </style>
+    <h2 style ="text-align:center;">{{ date.year }}年{{ date.month }}月{{ date.day }}日</h2>
+    <h3 style ="text-align:center;">予約可能講師</h3>
+    {% for schedule in schedules %}
+    {% if schedule %}
+        <div class="card">
+            <div class="d-flex justify-content-center">
+            {% if schedule.instructor_name.photo %}
+            <img src="{{ schedule.instructor_name.photo.url }}" alt="講師の写真" style="width:100px; height:100px; margin-bottom:10px;">
+            {% else %}
+            <span class="d-block text-center">写真はまだありません</span>
+            {% endif %}
+            </div>
+            {% if schedule.instructor_name.online_support == True and schedule.instructor_name.in_person_support == True %}
+                            <div class="button">対面</div>
+                            <div class="button">オンライン</div>
+                        {% elif schedule.instructor_name.online_support == True and schedule.instructor_name.in_person_support == False  %}
+                            <div class="button">オンラインのみ</div>
+                        {% elif schedule.instructor_name.online_support == False and schedule.instructor_name.in_person_support == True  %}
+                                <div class="button">対面のみ</div>
+                        {% endif %}
+
+           
+            <form action="{% url 'reservation:create_reservation' pk=student.pk %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="student_name" value="{{ student.student_name }}">
+                <input type="hidden" name="reserved_time" value="{{ date }}">
+                <input type="hidden" name="schedule_id" value="{{ schedule.id }}">
+                <input type="hidden" name="selected_time_slot" value="{{ timeslot }}">
+
+        <table class ="table">
+            <tbody>
+                <tr>
+                    <th scope="row">講師名</th>
+                    <td>{{ schedule.instructor_name }}</td>
+                </tr>
+                        
+                <tr>
+                    <th scope="row">時間</th>
+                {% if schedule.pk in available_times %}
+                    {% for schedule_id, time_slots in available_times.items %}
+                        {% if schedule_id == schedule.pk and time_slots %}
+                            <td>
+                                <select name="selected_time_slot" id="selected_time_slot">
+                                    {% for available_time in time_slots %}
+                                        <option value="{{ available_time }}">{{ available_time }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        {% elif schedule_id == schedule.pk %}
+                            <td>
+                                <p style="color:red;">満員になりました</p>
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                   
+                {% else %}
+                    <td>
+                    <select name="selected_time_slot" id="selected_time_slot">
+                        {% for time_slot in time_slots %}
+                            <option value="{{ time_slot }}">{{ time_slot }}</option>
+                        {% endfor %}
+                    </select>
+                    </td>
+                {% endif %}
+                </tr>
+            </tbody>
+        </table>
+            {% if  time_slots %}
+            <div class ="text-center">
+                <button type="submit" >予約する</button>
+            </div>
+            {% endif%}
+    </form>
+            
+ </div>
+    {% else %}
+        <p>予約可能な講師のスケジュールはありません</p>
+    {% endif %}
+    {% endfor %}
+    <div class="d-flex justify-content-center">
+  <a href="{% url 'reservation:schedule_list' pk=student.pk %}">戻る</a>
+
+    </div>
+                   
+
+
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% include 'navbar.html' %}
+
+
+<style>
+  .center {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    margin-bottom: 40px;
+  }
+
+  .buy {
+    margin-top: 30px;
+  }
+
+  .notification{
+    border:solid 1px;
+    margin:0 auto;
+    width:90%;
+    margin-top:40px;
+
+  }
+  .notification p{
+    margin-top:10px;
+    font-size:12px;
+
+  }
+</style>
+
+
+<div class="center">
+<h1>チケットの購入</h1>
+
+<form method="post">
+ 
+  {% csrf_token %}
+  <label for="ticket_type">チケットの種類:</label>
+  <select name="ticket_type" id="ticket_type">
+    <option value="1">1枚購入 (3500円)</option>
+    <option value="4">4枚購入 (14000円)</option>
+    <option value="8">8枚購入 (24500円)</option>
+  </select>
+  <div class="notification">
+    <p>・「購入する」を押すとすぐに反映されます</p>
+    <p>・チケットの代金は次回のお支払いに合算されます</p>
+    <p>・予約ごとに1枚が消費されます</p>
+    <p>・所持数は最初の画面にて確認できます</p>
+    <p>・払い戻しはできませんのでご注意ください</p>
+    <p>・有効期限は1年です</p>
+  
+  </div>
+  <br>
+  <div class ="buy">
+  <input type="submit" value="購入する">
+</div>
+</form>
+
+
+</div>
+{% endblock %}

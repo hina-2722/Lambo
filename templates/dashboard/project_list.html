@@ -1,0 +1,31 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+  <h1>プロジェクト一覧</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>説明</th>
+        <th>メンバー</th>
+        <th>開始日</th>
+        <th>終了日</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for project in projects %}
+        <tr>
+          <td><a href="{% url 'dashboard:project_edit' pk=project.pk %}">{{ project.name }}</a></td>
+          <td>{{ project.description }}</td>
+          <td>
+            {% for member in project.members.all %}
+              {{ member.student_name }}
+            {% endfor %}
+          </td>
+          <td>{{ project.start_date }}</td>
+          <td>{{ project.end_date }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

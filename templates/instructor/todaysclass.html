@@ -1,0 +1,35 @@
+{% block content %}
+{% include 'instructor/instructor_base.html' %}
+  <h1 class="text-center">今日の授業一覧</h1>
+
+  {% if todayclasses %}
+    <table class="table table-striped text-center">
+      <thead>
+        <tr>
+          <th>授業日</th>
+          <th>生徒名</th>
+          <th>時間帯</th>
+          <th>コース名</th>
+          <th>日報作成</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reservation in todayclasses %}
+          <tr>
+            <td>{{ reservation.schedule.date }}</td>
+            <td>{{ reservation.student.student_name }}</td>
+            <td>{{ reservation.time }}</td>
+            <td>{{ reservation.student.classroom }}</td>
+            <td><a href="{% url 'reservation:report_create' pk=instructor.pk  reservation_pk=reservation.pk%}" class="text-center">日報</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-center">今日の授業はありません。</p>
+  {% endif %}
+  <div style="text-align:center">
+    <a href ="{% url 'instructor:index'  %}"><button type ="submit">戻る</button></a>
+  </div>
+{% endblock %}
+

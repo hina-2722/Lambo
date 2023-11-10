@@ -1,0 +1,24 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h3 class="text-center">お知らせ作成</h3>
+    <form method="POST" class="my-form">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="id_title" class="form-label">件名</label>
+        {{ form.title}}
+      </div>
+      <div class="mb-3">
+        <label for="id_content" class="form-label">内容</label>
+        {{ form.content }}
+      </div>
+      <div class="mb-3">
+        <label for="id_content" class="form-label">TO</label>
+        {{ form.recipients }}
+      </div>
+      <button type="submit" class="btn btn-primary">作成</button>
+    </form>
+  </div>
+{% endblock %}
+

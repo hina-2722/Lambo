@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>未入金顧客への連絡</title>
+</head>
+<body>
+    <h1>未入金顧客への連絡</h1>
+    <p>以下の保護者様のお子様が未入金です。</p>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.parent.username }}</li>
+        {% endfor %}
+    </ul>
+    <p>ご確認をお願いいたします。</p>
+</body>
+</html>

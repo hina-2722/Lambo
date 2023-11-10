@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>子供一覧</h1>
+  {% if students %}
+    <ul>
+        {%for student in students %}
+      <li><a href="{% url 'student:mypage' pk=student.pk %}">{{ student.student_name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>子供が登録されていません。</p>
+  {% endif %}
+{% endblock %}

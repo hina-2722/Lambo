@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+  <h2 style="text-align:center">こどもの日報</h2>
+<div class="row">
+    {%  for reservation in reservations %}
+    {% if reservation.report%}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h3>{{ reservation.schedule.date|date:'n月j日'}}</h3>
+            <p class="card-text">{{ reservation.report.goal }}</p>
+
+            <p class="card-text">{{ reservation.schedule}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url  'student:report_detail' pk=student.pk report_id=reservation.pk%}" class="btn btn-sm btn-outline-secondary">コメントを見る</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% empty %}
+      <p style ="margin:0 auto;">日報はまだありません</p>
+      {% endfor %}
+</div>
+{% endblock %}

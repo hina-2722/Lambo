@@ -1,0 +1,38 @@
+{% block content %}
+{% include 'instructor/instructor_base.html' %}
+  <h1 class="text-center">授業履歴</h1>
+
+<form method="GET" action="" style="margin-top:20px; margin-bottom:20px; text-align:center">
+    <input type="text" name="search" placeholder="生徒名を入力" value="{{ search_query }}">
+    <button type="submit">検索</button>
+</form>
+
+
+    <table class="table table-striped text-center">
+      <thead>
+        <tr>
+          <th>授業日</th>
+          <th>生徒名</th>
+          <th>時間帯</th>
+          <th>コース名</th>
+          <th>日報</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reservation in allreservation %}
+          <tr>
+            <td style="width:5%">{{ reservation.reserved_time }}</td>
+            <td style="width:5%">{{ reservation.student.student_name }}</td>
+            <td style="width:5%">{{ reservation.time }}</td>
+            <td style="width:8%">{{ reservation.student.classroom }}</td>
+            <td style="width:5%"><a href="{% url 'reservation:report_create' pk=instructor.pk  reservation_pk=reservation.pk%}" class="text-center">日報</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  <div style="text-align:center">
+    <a href ="{% url 'instructor:index'  %}"><button type ="submit">戻る</button></a>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,28 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+    <h1>月次総売上</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>月</th>
+                <th>総売上</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for total_sale in total_sales %}
+                <tr>
+                    <td>{{ forloop.counter }}月</td>
+                    <td>{{ total_sale }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+            </tr>
+                <tr>
+                    <td>合計</td>
+                    <td>{{annual}}</td>
+                </tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css'%}">
+	{% block css %}{% endblock %}
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="{% url 'dashboard:student_list' %}">管理画面</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          生徒関係
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="{% url 'dashboard:student_list' %}">生徒一覧</a>
+	          <a class="dropdown-item" href="{% url 'dashboard:student_create' %}">生徒登録</a>
+			  <a class="dropdown-item" href="{% url 'dashboard:workbook' %}">教材登録</a>
+	        </div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  講師関係
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				  <a class="dropdown-item" href="{% url 'dashboard:instructor_list' %}">講師一覧</a>
+				  <a class="dropdown-item" href="{% url 'dashboard:add_instructor' %}">講師登録</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  授業関係
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				  <a class="dropdown-item" href="{% url 'dashboard:reservation_list' %}">授業予約</a>
+				  <a class="dropdown-item" href="{% url 'dashboard:todays_lesson' %}">本日の授業</a>
+				</div>
+			</li>
+            <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					月謝管理
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="nav-link" href="{% url 'dashboard:tuition_list' %}">塾生</a>
+					<a class="nav-link" href="{% url 'dashboard:E_tuition_list' %}">塾外生</a>
+				</div>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url 'dashboard:caluculate'%}">売上</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url 'dashboard:project_list' %}">プロジェクト</a>
+	      </li>
+	  <li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  顧客やりとり
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		  <a class="nav-link" href="{% url 'dashboard:create_notifications' %}">お知らせ配信</a>
+		  <a class="nav-link" href="{% url 'dashboard:contact_list' %}">お問い合わせ</a>
+		  <a class="nav-link" href="{% url 'dashboard:questionnaire_answer' %}">アンケート結果</a>
+		</div>
+	</li>
+	    </ul>
+	  </div>
+	  <span class="navbar-text">
+	    ログイン中： {{ request.user }}
+	  </span>
+	</nav>
+
+	<div class="container mt-4">
+		{% block content %}{% endblock %}
+	</div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	{% block js %}{% endblock %}
+</body>
+</html>

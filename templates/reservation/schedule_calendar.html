@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% include 'navbar.html' %}
+{% load static%}
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+</head>
+<style>
+    .swiper-container {
+        height: 300px; /* 好きな高さに変更してください */
+    }
+ .swiper-slide {
+            display: flex;
+            flex-direction: column;
+        }
+        .calendar-container {
+            flex: 1;
+            padding: 10px;
+        }
+        .calendar-container table {
+        width: 100%;
+    }
+    .calendar-container table th,
+    .calendar-container table td {
+        width: calc(100% / 7);
+        box-sizing: border-box;
+        padding: 16px;
+        text-align: center;
+    }
+
+</style>
+<h1 style="text-align:center;">予約可能日</h1>
+    <h2 style ="text-align:center;">{{ year }}年{{ month }}月</h2>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        {% for week_data in weeks_data %}
+        <div class="swiper-slide">
+            <div class="calendar-container">
+                <hr>
+            <table>
+                <tr>
+                    {% for day in week_data %}
+                        <th>
+                            {% if day.day_of_week == "Monday" %}
+                                月
+                            {% elif day.day_of_week == "Tuesday" %}
+                                火
+                            {% elif day.day_of_week == "Wednesday" %}
+                                水
+                            {% elif day.day_of_week == "Thursday" %}
+                                木
+                            {% elif day.day_of_week == "Friday" %}
+                                金
+                            {% elif day.day_of_week == "Saturday" %}
+                                土
+                            {% elif day.day_of_week == "Sunday" %}
+                                日
+                            {% endif %}
+                        </th>
+                    {% endfor %}
+                    </tr>
+                <tr>
+                    {% for day in week_data %}
+                            <td>
+                                {% if day.has_schedule %}
+                                    <a href="{% url 'reservation:available_instructor' year=year month=month day=day.date.day pk=student.pk %}">{{ day.date.day }}</a>
+                                {% else %}
+                                    {{ day.date.day }}
+                                {% endif %}
+                            </td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <hr>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+</div>
+<p style="text-align:center">※青色の日に予約ができます</p>
+
+
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+</script>
+{% endblock %}
+
+
+

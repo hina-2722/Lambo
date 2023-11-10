@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% include 'navbar.html' %}
+    <style>
+        /* スタイルシート */
+        .benefit{
+            background-image: url("{% static 'image/present.png' %}");
+            background-position: center top -40px; /* 画像を中央上部に配置 */
+            background-repeat: no-repeat; /* 画像の繰り返しを無効化 */
+            background-size: cover; /* 画像を要素に合わせて拡大・縮小 */
+            height: 100%; /* 要素の高さを100%に設定 */
+            opacity:0.7;
+        }
+        h1 {
+        text-align: center;
+        padding-top: 30px; /* 上部に20pxの余白を追加 */
+        }
+        h2{
+            font-size:16px;
+        }
+        .card-wrapper{
+            margin-bottom:20px;
+            margin-top:40px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width:80%; 
+            text-align:center;
+            margin:0 auto;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #ccc;
+            height: 20px;
+        }
+
+        .progress-bar .progress {
+            background-color: #00aaff;
+            height: 100%;
+        }
+
+        .discount {
+            color: red;
+            font-weight: bold;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background-color: #00aaff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .refund-conditions {
+            margin-top: 20px;
+        }
+        li{
+            list-style:none;
+        }
+    </style>
+<div class ="benefit">
+    <h1>特典</h1>
+
+    <!-- 「25回受講でノートプレゼント」「50回受講で図書カード（¥1000）」 「100回受講で図書カード(3000)」プレゼント
+<div class="card-wrapper">
+    <div class="card">
+       
+        <h2>① 00回受講でiPadプレゼント</h2>
+        <div class="progress-bar">
+            {% if report_count > 0 %}
+                <div class="progress" style="width: {{ report_count }}%"></div>
+            {% else %}
+                <div class="progress" style="width: 0%"></div>
+            {% endif %}
+        </div>
+        {% if report_count == 100 %}
+            <p style="text-align:center; font-size:18px; color:red; margin-top:10px;">おめでとうございます!</p>
+        {% endif %}
+    </div>
+</div>
+-->
+
+<div class="card-wrapper">
+    <div class="card">
+        <h2>① 通塾回数に応じた特典準備中</h2>
+        <p>ただいま、準備中楽しみにお待ちください </p>
+    </div>
+</div>
+
+<div class="card-wrapper">
+    <div class="card">
+        <h2>② 兄弟割引</h2>
+        <p>2人目の授業料 <span class="discount">10% off</span></p>
+    </div>
+</div>
+
+<div class="card-wrapper">
+    <div class="card">
+        <h2>③ 年一回の資格受験補助</h2>
+        <p style ="font-size:14px;">「英検」「漢検」「数検」「P検」など</p>
+    </div>
+</div>
+
+<div class="card-wrapper">
+    <div class="card">
+        <h2>④ 長期継続割引</h2>
+        <p>条件は<a href ="https://incite.website/pr/about-ime">こちら</a>から確認いただけます</p>
+    </div>
+</div>
+</div>
+{% endblock %}
+

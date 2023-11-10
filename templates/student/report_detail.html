@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<style>
+    .report-container {
+      text-align: center;
+      border: 1px solid black;
+      width: 70%;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .date {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .goal {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .instructor {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #888;
+    }
+
+    .comment {
+      font-size: 14px;
+      border-top: 1px solid black;
+      margin-top: 10px;
+      padding-top: 10px;
+    }
+
+    .no-report {
+      text-align: center;
+      margin-top: 50px;
+      color: #888;
+    }
+  </style>
+
+  <h2 style="text-align: center;">日報</h2>
+
+
+      <div class="report-container">
+        <h3 class="date">{{ reservation.schedule.date|date:'n月j日' }}</h3>
+        <p class="goal">目標: {{ reservation.report.goal }}</p>
+        <p class="instructor">担当講師: {{ reservation.schedule }}</p>
+        <div class="comment">
+          コメント:
+          <p>{{ reservation.report.comment }}</p>
+        </div>
+      </div>
+
+{% endblock %}

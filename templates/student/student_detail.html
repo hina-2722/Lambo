@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Select Child</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="child">Select Child:</label>
+    <select name="child" id="child">
+      {% for child in user.children.all %}
+        <option value="{{ child.pk }}">{{ child.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Select</button>
+  </form>
+{% endblock %}
+
